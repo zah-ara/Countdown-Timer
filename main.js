@@ -1,29 +1,12 @@
-// import { differenceInSeconds } from "date-fns";
-// import inquirer from "inquirer"
-// const res= await inquirer.prompt({
-//     type: "input",
-//     name: "userInput",
-//     message: "Please enter the amount of second",
-// });
-// let input = res.userInput
-// function startTime(val:number){
-//      const intTime= new Date() .setSeconds(new Date() .getSeconds() + val);
-//      const intervalTime = new Date(intTime);
-//  setInterval(() => {
-//     const currentTime = new Date()
-//     const timeDiff = differenceInSeconds(intervalTime, currentTime);
-//     if (timeDiff <= 0) {
-//         console.log("Time has expired");
-//     }
-//     const min = Math.floor((timeDiff % (3600*24)) / 3600);
-//     const sec = Math.floor(timeDiff % 60);
-//     console.log(`${min}:${sec}`);
-//  },1000)
-// }
-// startTime(input);
-import { differenceInSeconds } from "date-fns";
-import inquirer from "inquirer";
-const res = await inquirer.prompt({
+#! /usr/bin/env node
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const date_fns_1 = require("date-fns");
+const inquirer_1 = __importDefault(require("inquirer"));
+const res = await inquirer_1.default.prompt({
     type: "input",
     name: "userInput",
     message: "Please enter the amount of seconds",
@@ -40,12 +23,11 @@ const res = await inquirer.prompt({
     }
 });
 let input = res.userInput;
-//const input = parseInt(res.userInput, 10); // Convert input to number
 function startTime(val) {
     const endTime = new Date(new Date().getTime() + val * 1000); // Add seconds to current time
     const interval = setInterval(() => {
         const currentTime = new Date();
-        const timeDiff = differenceInSeconds(endTime, currentTime);
+        const timeDiff = (0, date_fns_1.differenceInSeconds)(endTime, currentTime);
         if (timeDiff <= 0) {
             console.log("Timer has expired");
             clearInterval(interval); // Clear the interval
